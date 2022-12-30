@@ -10,7 +10,6 @@ const EmployerForm = () => {
   const [form, setForm] = useState({
     companyImage: "",
     name: "",
-    category: "",
     description: "",
     location: ""
   });
@@ -38,13 +37,6 @@ const EmployerForm = () => {
             inputType="text"
             value={form.name}
             handleChange={(e) => handleFormFieldChange("name", e)}
-          />
-          <FormField
-            labelName="Category *"
-            placeholder="Enter company Category"
-            inputType="text"
-            value={form.category}
-            handleChange={(e) => handleFormFieldChange("category", e)}
           />
           <FormField
             isTextArea

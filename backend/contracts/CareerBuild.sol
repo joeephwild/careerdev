@@ -66,7 +66,6 @@ contract CareerBuild {
     mapping(uint256 => Jobs) public company;
     //applicants
     mapping(address => applyJob) public listApplicant;
-    mapping(address => mapping(uint256 => Jobs)) public jmap;
     //array of type candidate struct to store every candidate in the dapp like [{name, skills etc},{name, skills etc},{name, skills etc}] and so on
     Candidate[] listCandidates;
     //array of type employer struct to store every candidate in the dapp like [{name, skills etc},{name, skills etc},{name, skills etc}] and so on
@@ -180,7 +179,7 @@ contract CareerBuild {
         require(msg.sender != administrator, "Administrator not allowed");
         employer storage Profile = companyProfile[_owner];
         Profile.CompanyName = _CompanyName;
-        Profile.owner = msg.sender;
+        Profile.owner = _owner;
         Profile.Category = _Category;
         Profile.description = _description;
         Profile.location = _location;
