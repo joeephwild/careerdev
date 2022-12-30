@@ -10,7 +10,7 @@ const ApplicantsForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
-    skills: [],
+    skills: "",
     experience: "",
     salaryExpectation: "",
     description: "",
@@ -72,7 +72,7 @@ const ApplicantsForm = () => {
             placeholder="Ente Your skills"
             inputType="text"
             value={form.skills}
-            handleChange={(e) => handleFormFieldChange("skillls", e)}
+            handleChange={(e) => handleFormFieldChange("skills", e)}
           />
           <FormField
             isTextArea

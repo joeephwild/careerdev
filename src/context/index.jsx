@@ -1,88 +1,44 @@
-import React, { useContext, createContext } from 'react';
+import React, { useContext, createContext } from "react";
 
-import { useAddress, useContract, useContractWrite } from '@thirdweb-dev/react';
-import { ethers } from 'ethers';
-import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
+import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
+import { ethers } from "ethers";
+import { EditionMetadataWithOwnerOutputSchema } from "@thirdweb-dev/sdk";
+import { contractAbi, contractAddress } from "../constant";
 
 const StateContext = createContext();
 
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const signer = provider.getSigner();
+const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
 export const StateProvider = ({ children }) => {
-  const { contract } = useContract('0x6b1E5780dADcdfAB8E956DF12CAEb8C96D51afAf');
-  const address =  useAddress()
-  const { mutateAsync: createAnAccount } = useContractWrite(contract, 'createAnAccount');
-  const {mutateAsync: createEmployerAccount } = useContractWrite(contract, 'createEmployerAccount');
-  const {mutateAsync: listAJob } = useContractWrite(contract, 'listAJob');
-
-  const publishAccount = async(form) => {
-    try {
-      const data =await  createAnAccount(
-        [
-          form.name,
-          address,
-          form.skills,
-          form.experience,
-          form.salaryExpectation,
-          form.description,
-          form.profileImage,
-          form.githubLink
-        ]
-      )
-      console.log("contract call success", data)
-    } catch (error) {
-      console.log("contract call failure", error)
-    }
+  const { contract } = useContract("0xeC23733e5a26a9d80EA3E1254072C1E46b3Ce326")
+  const { mutateAsync: createEmployerAccount} = useContractWrite(contract, "createEmployerAccount")
+  const address = useAddress()
+const call = async(
+  _companyImage, _CompanyName, _Category, _owner, _description, _location
+) => {
+  try {
+    const data = await createEmployerAccount([
+      _companyImage, _CompanyName, _Category, address, _description, _location
+    ])
+    console.log(data)
+    alert("done")
+  } catch (error) {
+    alert("failed")
   }
+ 
+}
 
-  const publishEmployerAccount = async(form) => {
-    try {
-      const data =await  createEmployerAccount(
-        [
-          form.companyName,
-          form.category,
-          address,
-          form.description,
-          form.location
-        ]
-      )
-      console.log("contract call success", data)
-    } catch (error) {
-      console.log("contract call failure", error)
-    }
-  }
-
-  const publishAJob = async(form) => {
-    try {
-      const data =await  listAJob(
-        [
-          pid,
-          form.companyName,
-          form.companyImage,
-          form.category,
-          form.salary,
-          form.description,
-          form.skills,
-          form.location,
-          form.jobType
-        ],
-       {value: ethers.utils.formatEther("0.05", 18)}
-      )
-      console.log("contract call success", data)
-    } catch (error) {
-      console.log("contract call failure", error)
-    }
-  }
   return (
     <StateContext.Provider
-      value={{ 
-        createAnAccount: publishAccount,
-        address,
-        createEmployerAccount: publishEmployerAccount,
-        listAJob: publishAJob
+      value={{
+        createEmployerAccount: call
       }}
     >
       {children}
     </StateContext.Provider>
-  )
-}
+  );
+};
 
 export const useStateContext = () => useContext(StateContext);

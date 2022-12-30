@@ -12,13 +12,11 @@ const activeChainId = ChainId.Mumbai;
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-  <React.StrictMode>
-    <ThirdwebProvider desiredChainId={activeChainId}>
-      <StateProvider>
-        <Router>
+    <ThirdwebProvider autoConnect={true} desiredChainId={activeChainId}>
+      <Router>
+        <StateProvider>
           <App />
-        </Router>
-      </StateProvider>
+        </StateProvider>
+      </Router>
     </ThirdwebProvider>
-  </React.StrictMode>
 );
