@@ -6,8 +6,8 @@ module.exports = {
     networks: {
        goerli: {
         hardhat: {},
-          url: 'https://polygon-mumbai.infura.io/v3/98ce9bdb13f74397b89d7ff5eea50318',
-          accounts: [`0x${process.env.PRIVATE_KEY}`]
+          url: 'https://eth-goerli.g.alchemy.com/v2/b6UPO44nOt2Ky1fqBJnuPhLUGKROYa9z',
+          accounts: [`0x${process.env.REACT_APP_PRIVATE_KEY}`]
        }
     },
     settings: {

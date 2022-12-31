@@ -1,16 +1,17 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
+import { ConnectWallet, Web3Button } from "@thirdweb-dev/react";
 import React from "react";
 import CustomButton from "./CustomButton";
 import logo from '../assets/logo-white.png'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="w-full fixed z-[8888] top-0 bg-black flex items-center justify-between px-6">
+    <nav className="w-full fixed z-[8888] top-0 bg-transparent flex items-center justify-between px-6">
       <div className="flex space-x-4 items-center">
         <img src={logo} alt='logo' className='h-24 w-24 object-contain' />
         <ul className="md:flex hidden list-none items-center space-x-8 font-normal">
           <li>Companies</li>
-          <li>Jobs</li>
+          <Link to='/jobs'>Jobs</Link>
           <li>Interviews</li>
           <li>faq</li>
           <li></li>

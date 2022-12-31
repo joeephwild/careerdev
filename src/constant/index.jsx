@@ -1,4 +1,43 @@
-import contractabi from './CareerBuild.json'
+import contractabi from "./CareerBuild.json";
 
-export const contractAbi = contractabi.abi
-export const contractAddress = "0xeC23733e5a26a9d80EA3E1254072C1E46b3Ce326"
+export const contractAbi = contractabi.abi;
+export const contractAddress = "0x00a696F18e58857ee7A312d097DF2362Fc8ad0d9";
+
+export const converTime = (time) => {
+  const newTime = new Date(time.toNumber());
+
+  const realTime =
+    newTime.getHours() +
+    "/" +
+    newTime.getMinutes() +
+    "/" +
+    newTime.getSeconds() +
+    "  Date:" +
+    newTime.getDate() +
+    "/" +
+    (newTime.getMonth() + 1) +
+    "/" +
+    newTime.getFullYear();
+
+  return realTime;
+};
+
+export const convertToDate = (number) =>{
+  const date = new Date(number);
+  const formattedDate = date.toLocaleDateString('en-US', {timeZone: 'UTC'})
+  return formattedDate;
+}
+
+export const convertToTime = (time) => {
+  const timeElement = time.split("");
+  const hours = parseInt(timeElement[0], 10);
+  const minute = parseInt(timeElement[1], 10);
+  const seconds = parseInt(timeElement[2], 10);
+
+  const formattedHours = hours.toString().padStart(2, "0");
+  const formattedMinutes = minute.toString().padStart(2, "0");
+  const formattedSeconds = seconds.toString().padStart(2, "0");
+
+  const formattedTime = [formattedHours, formattedMinutes, formattedSeconds].join(":");
+   return formattedTime;
+};

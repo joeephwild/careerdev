@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div className="flex mt-[70px] flex-col items-center justify-center">
-      <span className="lg:text-7xl md:text-5xl text-4xl mt-7 font-bold text-center">
+      <span className="lg:text-7xl md:text-5xl text-4xl mt-7 font-ClashDisplay-Bold font-bold text-center">
         {" "}
         <span className="text-green-500">CareerUp</span>- List and Find <br />{" "}
         your dream job here

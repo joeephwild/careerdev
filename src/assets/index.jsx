@@ -1,0 +1,1 @@
+import clock from './clock.svg'

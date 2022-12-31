@@ -1,11 +1,14 @@
+import { Web3Button } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { CustomButton, FormField } from "../components";
-import { useStateContext } from "../context";
+import { CustomButton, FormField, Loader } from "../components";
+import { contractAddress } from "../constant";
+import { useStateContext } from "../context"
 
 const CreateJoblist = () => {
-  const { listAjob } = useStateContext()
+  //const { listAjob } = useStateContext();
+  const amount = 0.05
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     companyName: "",
@@ -16,22 +19,32 @@ const CreateJoblist = () => {
     skills: "",
     location: "",
     jobType: "",
+    value: ethers.utils.parseEther(amount.toString())
   });
 
   const handleFormFieldChange = (fieldName, e) => {
-    setForm({...form, [fieldName]: e.target.value});
-  }
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    await listAjob({...form, value: ethers.utils.formatEther("0.05", 18)})
-    setIsLoading(false)
+    setForm({ ...form, [fieldName]: e.target.value });
   };
+  const handleSubmit = async(contract) => {
+    setIsLoading(true)
+   const data = await contract.call(
+      "listAJob",
+      form.companyName,
+      form.companyImage,
+      form.category,
+      form.salary,
+      form.description,
+      form.skills,
+      form.location,
+      form.jobType,
+    );
+    console.log(data)
+    setIsLoading(false);
+  }
   return (
     <div className="w-full h-full items-center flex flex-col justify-center">
       <div className="flex  flex-col rounded-[10px] sm:p-10 p-4">
-        {isLoading && "loading..."}
+        {isLoading && <Loader />}
         <div className=" flex-col flex justify-center items-center p-[16px] sm:min-w-[680px] bg-[#3a3a43] rounded-[10px]">
           <div className="text-white text-xl font-bold">Applicant Account</div>
           <form
@@ -99,14 +112,18 @@ const CreateJoblist = () => {
               labelName="Company Image *"
               placeholder="Enter valid image url"
               inputType="text"
-              value={form.profile}
-              handleChange={(e) => handleFormFieldChange("profile", e)}
+              value={form.companyImage}
+              handleChange={(e) => handleFormFieldChange("companyImage", e)}
             />
-            <CustomButton
-              btnType="submit"
-              title="Post"
-              style="bg-green-500 rounded-lg mt-8"
-            />
+            <div>
+              <Web3Button
+              overrides={amount}
+                contractAddress={contractAddress}
+                action={handleSubmit}
+              >
+                listAJob
+              </Web3Button>
+            </div>
           </form>
         </div>
       </div>

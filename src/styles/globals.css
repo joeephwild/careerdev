@@ -15,3 +15,8 @@ body {
   font-family: "ClashDisplay-Regular" ;
   src: url('../assets/ClashDisplay-Regular.woff2');
 }
+
+@font-face {
+  font-family: "ClashDisplay-Light" ;
+  src: url('../assets/ClashDisplay-Light.woff');
+}

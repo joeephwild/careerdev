@@ -25,7 +25,6 @@ contract CareerBuild {
         address owner;
         string description;
         string location;
-        string jobType;
     }
 
     struct Candidate {
@@ -74,7 +73,6 @@ contract CareerBuild {
     Jobs[] listJobs;
 
     applyJob[] applicants;
-    uint256 listingPrice;
     // only company owner can access
     modifier onlyOwner() {
         require(
@@ -94,22 +92,9 @@ contract CareerBuild {
         _;
     }
 
-    event job(address owner, address company, string message);
-
-    //to update the price
-    function updateListingPrice(uint256 _newPrice)
-        public
-        onlyAdministrator
-        returns (string memory)
-    {
-        listingPrice = _newPrice;
-        return "price updated to new";
-    }
-
     // create the user account details
     function createAnAccount(
         string memory _name,
-        address _owner,
         string memory _skills,
         uint256 _experience,
         uint256 _salaryExpectation,
@@ -119,7 +104,7 @@ contract CareerBuild {
     ) public returns (uint256) {
         require(msg.sender != administrator, "Administrator not allowed");
 
-        Candidate storage accounts = profile[_owner];
+        Candidate storage accounts = profile[msg.sender];
         accounts.name = _name;
         accounts.ownerUser = msg.sender;
         accounts.skills = _skills;
@@ -171,15 +156,14 @@ contract CareerBuild {
     function createEmployerAccount(
         string memory _CompanyName,
         string memory _Category,
-        address _owner,
         string memory _description,
         string memory _location
     ) public {
         //create a new variable to store every data
         require(msg.sender != administrator, "Administrator not allowed");
-        employer storage Profile = companyProfile[_owner];
+        employer storage Profile = companyProfile[msg.sender];
         Profile.CompanyName = _CompanyName;
-        Profile.owner = _owner;
+        Profile.owner = msg.sender;
         Profile.Category = _Category;
         Profile.description = _description;
         Profile.location = _location;
@@ -206,18 +190,15 @@ contract CareerBuild {
             companyProfile[msg.sender].Category = _data;
         } else if (option == 3) {
             companyProfile[msg.sender].description = _data;
-        } else if (option == 4) {
-            companyProfile[msg.sender].location = _data;
         } else {
-            companyProfile[msg.sender].jobType = _data;
+            companyProfile[msg.sender].location = _data;
         }
-
-        return companyProfile[msg.sender];
+      return companyProfile[msg.sender];
+        
     }
 
     // create a new job in dapp
     function listAJob(
-        uint256 _id,
         string memory _CompanyName,
         string memory _companyImage,
         string memory _Category,
@@ -225,28 +206,22 @@ contract CareerBuild {
         string memory _description,
         string memory _skills,
         string memory _location,
-        string memory _jobType,
-        uint256 _price
-    ) public payable returns (uint256) {
-        require(
-            msg.value == listingPrice,
-            "pls send the asking price in order"
-        );
-        listingPrice = _price;
+        string memory _jobType
+    ) public returns (uint256) {
         //create a new variable to store every data
-        Jobs storage post = company[_id];
+        Jobs storage post = company[jobCounter];
         post.CompanyName = _CompanyName;
         post.companyImage = _companyImage;
         post.Category = _Category;
         post.salary = _salary;
         post.timeStamp = block.timestamp;
         post.noAppllicant = applicant;
+        post.owner =msg.sender;
         post.description = _description;
         post.skills = _skills;
         post.location = _location;
         post.jobType = _jobType;
         post.isJobVacant = true;
-        payable(administrator).transfer(listingPrice);
         //pushing the newly created job variable to the array
         listJobs.push(post);
         jobCounter++;
@@ -280,12 +255,10 @@ contract CareerBuild {
         string memory _name,
         string memory _coverLetter,
         string memory _resume,
-        string memory _portfolioLink,
-        address _owner
+        string memory _portfolioLink
     ) public returns (uint256) {
-        Jobs storage post = company[_jobId];
-        post.applicants.push(msg.sender);
-        applyJob storage applyIt = listApplicant[_owner];
+        company[_jobId].applicants.push(msg.sender);
+        applyJob storage applyIt = listApplicant[msg.sender];
         applyIt.name = _name;
         applyIt.coverLetter = _coverLetter;
         applyIt.resume = _resume;

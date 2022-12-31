@@ -8,7 +8,8 @@ module.exports = {
     extend: {
       fontFamily: {
         "ClashDisplay-Bold": ["ClashDisplay-Bold"],
-        "ClashDisplay-Regular": ["ClashDisplay-Regular"]
+        "ClashDisplay-Regular": ["ClashDisplay-Regular"],
+        "ClashDisplay-Light": ["ClashDisplay-Light"]
       } 
     },
   },
