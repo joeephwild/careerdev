@@ -22,7 +22,7 @@ const EmployerForm = () => {
     setForm({ ...form, [fieldName]: e.target.value });
   };
 
-  const handleSubmit = async (contract) => {
+  const handleSubmit = async(contract) => {
     setIsLoading(true);
   const data = await  contract.call(
       "createEmployerAccount",
@@ -33,7 +33,7 @@ const EmployerForm = () => {
     );
     console.log(data)
     setIsLoading(false);
-    navigate("/");
+    navigate("/")
   };
   return (
     <div className="flex  flex-col rounded-[10px] sm:p-10 p-4">

@@ -48,6 +48,19 @@ export const StateProvider = ({ children }) => {
     console.log(parsedAccount)
     return parsedAccount;
   }
+
+  const  getApplicant = async() => {
+    const applicant =  await contract.call( "getAllApplicant")
+    const parsedApplicant = applicant.map((user, i) => ({
+       name: user.name,
+       address: user.candidateAddress,
+       cover: user.coverLetter,
+       experience: user.resume,
+       salary: user.portfolioLink,
+    }))
+    console.log(parsedAccount)
+    return parsedAccount;
+  }
  
 
   return (
@@ -55,7 +68,9 @@ export const StateProvider = ({ children }) => {
       value={{
         getJobs,
         contract,
-        address
+        address,
+        getAccount,
+        getApplicant
       }}
     >
       {children}

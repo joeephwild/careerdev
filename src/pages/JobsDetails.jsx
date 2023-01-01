@@ -7,7 +7,7 @@ const JobsDetails = () => {
   return (
     <div className=" mt-[10%] mx-4 my-4 md:mt-[2%]">
       <div className="grid md:grid-cols-6 grid-cols-1 justify-center items-center mx-auto  gap-3">
-        <div className='col-span-4'>
+        <div className="col-span-4">
           <div className="flex border-b-2 py-4 border-gray-700 w-full justify-between">
             <div className="flex space-x-2 items-center">
               <img
@@ -31,32 +31,46 @@ const JobsDetails = () => {
           <div className="flex py-4 w-full justify-between">
             <div className="flex flex-col items-start">
               <span>Location</span>
-              <span className="font-ClashDisplay-Light font-noraml mt-6">{state.location}</span>
+              <span className="font-ClashDisplay-Light font-noraml mt-6">
+                {state.location}
+              </span>
             </div>
             <div className="flex flex-col items-start">
               <span>Job Type</span>
-              <span className="font-ClashDisplay-Light font-noraml mt-6">{state.location}</span>
+              <span className="font-ClashDisplay-Light font-noraml mt-6">
+                {state.location}
+              </span>
             </div>
             <div className="flex flex-col items-start">
               <span>Salary</span>
-              <span className="font-ClashDisplay-Light font-noraml mt-6">{state.salary}</span>
+              <span className="font-ClashDisplay-Light font-noraml mt-6">
+                {state.salary}
+              </span>
             </div>
           </div>
           <div className="flex flex-col items-start">
             <span>Industry</span>
-            <span className="font-ClashDisplay-Light font-noraml mt-6">{state.category}</span>
+            <span className="font-ClashDisplay-Light font-noraml mt-6">
+              {state.category}
+            </span>
           </div>
 
           <div className="flex flex-col items-start">
-            <span className='font-bold font-ClashDisplay-Bold text-gray-400'>Description</span>
-            <span className="font-ClashDisplay-Light font-noraml mt-6">{state.desc}</span>
+            <span className="font-bold font-ClashDisplay-Bold text-gray-400">
+              Description
+            </span>
+            <span className="font-ClashDisplay-Light font-noraml mt-6">
+              {state.desc}
+            </span>
           </div>
         </div>
-        
-        <div className="col-span-2 mt-9">
-          <ApplicationCard
-          index={state.pid} />
-        </div>
+        {!state.owner && (
+          <div className="col-span-2 mt-9">
+            <ApplicationCard
+             index={state.pid} 
+            />
+          </div>
+        )}
       </div>
     </div>
   );

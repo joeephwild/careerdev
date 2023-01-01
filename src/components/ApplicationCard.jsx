@@ -13,7 +13,7 @@ const ApplicationCard = ({index}) => {
   return (
     <div className="col-span-2 ">
       <div className="flex flex-col bg-[#3a3a43] py-3 px-4">
-        <form>
+        <form className="mt-6">
           <FormField
             inputType="text"
             labelName="Full Name"

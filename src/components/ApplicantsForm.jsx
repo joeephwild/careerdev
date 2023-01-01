@@ -1,63 +1,58 @@
 import { Web3Button } from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useStateContext } from "../context";
-import CustomButton from "./CustomButton";
+import { contractAddress } from "../constant";
 import FormField from "./FormField";
 import Loader from "./Loader";
 
 const ApplicantsForm = () => {
-  //const { createAnAccount } = useStateContext()
+  //const { createEmployerAccount } = useStateContext();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     skills: "",
-    experience: "",
-    salaryExpectation: "",
+    expereience: "",
+    salary: "",
     description: "",
-    profile: "",
-    githubLink: "",
+    image: "",
+    link: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleFormFieldChange = (fieldName, e) => {
     setForm({ ...form, [fieldName]: e.target.value });
   };
 
-  const checkIfImage = (url, callback) => {
-    const img = new Image();
-    img.src = url;
-
-    if (img.complete) callback(true);
-
-    img.onload = () => callback(true);
-    img.onerror = () => callback(false);
-  };
-  const handleSubmit = async(contract) => {
-    setIsLoading(true)
+  const handleSubmit = async (contract) => {
+    setIsLoading(true);
     const data = await contract.call(
-        "createAnAccount",
-        form.name,
-        form.skills,
-        form.experience,
-        form.salaryExpectation,
-        form.description,
-        form.profile,
-        form.githubLink
-      );
-      console.log(data)
-      setIsLoading(false)
-      navigate('/')
-  }
-    return (
+      "createAnAccount",
+      form.name,
+      form.skills,
+      form.expereience,
+      form.salary,
+      form.description,
+      form.image,
+      form.link
+    );
+    console.log(data);
+    setIsLoading(false);
+    navigate("/");
+  };
+  return (
     <div className="flex  flex-col rounded-[10px] sm:p-10 p-4">
       <div className=" flex-col flex justify-center items-center p-[16px] sm:min-w-[680px] bg-[#3a3a43] rounded-[10px]">
-      {isLoading && <Loader />}
-        <div className="text-white text-xl font-bold">Applicant Account</div>
-        <form action="" className="mt-6 flex flex-col items-center w-full">
+        {isLoading && <Loader />}
+        <div className="text-white text-xl font-bold">Employer Account</div>
+
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="mt-6 flex flex-col items-center w-full"
+        >
           <div className="flex flex-wrap gap-[40px]">
             <FormField
-              labelName="name *"
-              placeholder="Enter fullName"
+              labelName="FullName *"
+              placeholder="John Doe"
               inputType="text"
               value={form.name}
               handleChange={(e) => handleFormFieldChange("name", e)}
@@ -65,67 +60,63 @@ const ApplicantsForm = () => {
             <FormField
               labelName="Salary Expectation *"
               placeholder="$400000- $1200000"
-              inputType="text"
-              value={form.salaryExpectation}
-              handleChange={(e) =>
-                handleFormFieldChange("salaryExpectation", e)
-              }
+              inputType="number"
+              value={form.salary}
+              handleChange={(e) => handleFormFieldChange("salary", e)}
             />
           </div>
           <div className="flex flex-wrap gap-[40px]">
             <FormField
-              labelName="Skills *"
-              placeholder="Enter Skills"
+              labelName="Enter Role *"
+              placeholder="Blockchain Developer"
               inputType="text"
               value={form.skills}
               handleChange={(e) => handleFormFieldChange("skills", e)}
             />
             <FormField
               labelName="Experience *"
-              placeholder="9yrs"
-              inputType="text"
-              value={form.experience}
-              handleChange={(e) =>
-                handleFormFieldChange("experience", e)
-              }
+              placeholder="8yrs"
+              inputType="number"
+              value={form.expereience}
+              handleChange={(e) => handleFormFieldChange("expereience", e)}
             />
           </div>
           <FormField
-            isTextArea
+          isTextArea
             labelName="Description *"
-            placeholder="Express your personality"
+            placeholder="Enter compeling description..."
             inputType="text"
             value={form.description}
             handleChange={(e) => handleFormFieldChange("description", e)}
           />
           <FormField
             labelName="Profile Image *"
-            placeholder="Enter valid image url"
+            placeholder="Enter valid url"
             inputType="text"
-            value={form.profile}
-            handleChange={(e) => handleFormFieldChange("profile", e)}
+            value={form.image}
+            handleChange={(e) => handleFormFieldChange("image", e)}
           />
           <FormField
-            labelName="Github Link *"
-            placeholder="Enter valid github/portfolio url"
+            labelName="Location *"
+            placeholder="Enter company Location"
             inputType="text"
-            value={form.githubLink}
-            handleChange={(e) => handleFormFieldChange("githubLink", e)}
+            value={form.link}
+            handleChange={(e) => handleFormFieldChange("link", e)}
           />
           <div className="mt-6">
             <Web3Button
               accentColor="green"
-              contractAddress="0xC5297f0E7a89E383deEce762cbe3eA5B0a2E1E43"
+              contractAddress={contractAddress}
               action={handleSubmit}
             >
-              createAnAccount
+              createEmployerAccount
             </Web3Button>
           </div>
           <div className="flex flex-col items-center mt-6 ">
-            <span>Wanna apply for jobs, sign up as an employer below</span>
-            <Link to="/createaccount">
-              <span className="text-lg cursor-pointer font-bold underline text-green-500">
-                Employer Account
+            <span>Wanna apply for jobs, sign up as an applicant below</span>
+            <Link to="/ApplicantForm">
+              <span className="text-lg font-bold underline text-green-500">
+                Create an Applicant account
               </span>
             </Link>
           </div>
