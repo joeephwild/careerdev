@@ -1,11 +1,12 @@
 import React from "react";
 import { ConnectWallet } from "@thirdweb-dev/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomButton from "./CustomButton";
 import { useStateContext } from "../context";
 
 const Hero = () => {
   const { connect, address } = useStateContext();
+  const navigate = useNavigate()
 
   return (
     <div className="flex mt-[70px] flex-col items-center justify-center">
