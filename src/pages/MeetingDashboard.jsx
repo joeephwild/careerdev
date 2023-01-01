@@ -7,7 +7,7 @@ const MeetingDashboard = () => {
   const [room, setRoom] = useState([]);
   const roomId = useHuddleStore(state => state.roomState.roomId);
   const iframeConfig = {
-    roomUrl: `https://iframe.huddle01.com/${roomId}`,
+    roomUrl: `https://careerdev.vercel.app/${roomId}`,
     height: "100%",
     width: "100%",
   };
