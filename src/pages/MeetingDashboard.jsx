@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { huddleIframeApp, HuddleIframe } from "@huddle01/huddle01-iframe";
+import { data } from "autoprefixer";
 
 const MeetingDashboard = () => {
+  const [room, setRoom] = useState([])
   const iframeConfig = {
-    roomUrl: "https://iframe.huddle01.com/test-room",
+    roomUrl: "https://iframe.huddle01.com/aHVkZGxlMDEuY29t",
     height: "100%",
     width: "100%",
   };
@@ -27,6 +29,7 @@ const MeetingDashboard = () => {
 
   useEffect(() => {
     huddleIframeApp.on("peer-join", (data) =>
+    setRoom(data),
       console.log({ iframeData: data })
     );
     huddleIframeApp.on("peer-left", (data) =>
@@ -40,7 +43,7 @@ const MeetingDashboard = () => {
           <br />
         </div>
         <div className="flex justify-center w-screen h-screen items-center">
-          <HuddleIframe config={iframeConfig} />
+          <HuddleIframe  config={iframeConfig} />
         </div>
         <div className="flex space-x-3">
         {Object.keys(huddleIframeApp.methods)

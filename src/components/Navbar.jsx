@@ -72,10 +72,12 @@ const Navbar = () => {
             }}
           />
         </div>
+        <Link to='/meet'>
         <CustomButton
           title="start a meeting"
           style="bg-green-500 text-sm rounded-lg"
         />
+        </Link>
       </div>
       <AiOutlineMenu
         className="lg:hidden block"
