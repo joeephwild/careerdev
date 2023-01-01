@@ -1,7 +1,7 @@
 import { Web3Button } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CustomButton, FormField, Loader } from "../components";
 import { contractAddress } from "../constant";
 import { useStateContext } from "../context"
@@ -9,6 +9,7 @@ import { useStateContext } from "../context"
 const CreateJoblist = () => {
   //const { listAjob } = useStateContext();
   const amount = 0.05
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     companyName: "",
@@ -40,6 +41,7 @@ const CreateJoblist = () => {
     );
     console.log(data)
     setIsLoading(false);
+    navigate("/jobs")
   }
   return (
     <div className="w-full h-full items-center flex flex-col justify-center">
@@ -48,7 +50,7 @@ const CreateJoblist = () => {
         <div className=" flex-col flex justify-center items-center p-[16px] sm:min-w-[680px] bg-[#3a3a43] rounded-[10px]">
           <div className="text-white text-xl font-bold">Applicant Account</div>
           <form
-            onSubmit={handleSubmit}
+            onSubmit={(e) => e.preventDefault()}
             action=""
             className="mt-6 flex flex-col items-center w-full"
           >
@@ -95,7 +97,7 @@ const CreateJoblist = () => {
               <FormField
                 labelName="Remote/Onsite/Hybrid *"
                 placeholder="Enter JobType..."
-                inputType="number"
+                inputType="text"
                 value={form.jobType}
                 handleChange={(e) => handleFormFieldChange("jobType", e)}
               />

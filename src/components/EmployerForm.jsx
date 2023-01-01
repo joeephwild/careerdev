@@ -33,7 +33,7 @@ const EmployerForm = () => {
     );
     console.log(data)
     setIsLoading(false);
-    navigate("/")
+    navigate("/jobs")
   };
   return (
     <div className="flex  flex-col rounded-[10px] sm:p-10 p-4">

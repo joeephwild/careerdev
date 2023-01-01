@@ -6,7 +6,6 @@ import { useAccount, useAddress } from '@thirdweb-dev/react'
 
 const JobsCard = ({item, handleClick}) => {
   const address = useAddress()
-    console.log(item)
     function truncate(str, n) {
       return str?.length > n ? str.substr(0, n - 1) + "..." : str;
     }

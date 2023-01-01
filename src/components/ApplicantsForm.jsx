@@ -11,6 +11,7 @@ const ApplicantsForm = () => {
   const [form, setForm] = useState({
     name: "",
     skills: "",
+    stack: "",
     expereience: "",
     salary: "",
     description: "",
@@ -29,6 +30,7 @@ const ApplicantsForm = () => {
       "createAnAccount",
       form.name,
       form.skills,
+      form.stack,
       form.expereience,
       form.salary,
       form.description,
@@ -37,13 +39,13 @@ const ApplicantsForm = () => {
     );
     console.log(data);
     setIsLoading(false);
-    navigate("/");
+    navigate("/profile");
   };
   return (
     <div className="flex  flex-col rounded-[10px] sm:p-10 p-4">
       <div className=" flex-col flex justify-center items-center p-[16px] sm:min-w-[680px] bg-[#3a3a43] rounded-[10px]">
         {isLoading && <Loader />}
-        <div className="text-white text-xl font-bold">Employer Account</div>
+        <div className="text-white text-xl font-bold">Applicant Account</div>
 
         <form
           onSubmit={(e) => e.preventDefault()}
@@ -72,6 +74,13 @@ const ApplicantsForm = () => {
               inputType="text"
               value={form.skills}
               handleChange={(e) => handleFormFieldChange("skills", e)}
+            />
+             <FormField
+              labelName="Tech Stack *"
+              placeholder="Solidity, React"
+              inputType="text"
+              value={form.stack}
+              handleChange={(e) => handleFormFieldChange("stack", e)}
             />
             <FormField
               labelName="Experience *"
@@ -113,10 +122,10 @@ const ApplicantsForm = () => {
             </Web3Button>
           </div>
           <div className="flex flex-col items-center mt-6 ">
-            <span>Wanna apply for jobs, sign up as an applicant below</span>
-            <Link to="/ApplicantForm">
+            <span>Wanna apply for jobs, sign up as an Employer below</span>
+            <Link to="/createaccount">
               <span className="text-lg font-bold underline text-green-500">
-                Create an Applicant account
+                Employer account
               </span>
             </Link>
           </div>
