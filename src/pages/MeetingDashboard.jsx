@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { huddleIframeApp, HuddleIframe } from "@huddle01/huddle01-iframe";
-import { data } from "autoprefixer";
 import { useHuddleStore } from "@huddle01/huddle01-client/store";
 
 const MeetingDashboard = () => {
-  const [room, setRoom] = useState([]);
   const roomId = useHuddleStore(state => state.roomState.roomId);
   const iframeConfig = {
-    roomUrl: `https://careerdev.vercel.app/${roomId}`,
+    roomUrl: `https://iframe.huddle01.com/${roomId}`,
     height: "100%",
     width: "100%",
   };
@@ -31,7 +29,6 @@ const MeetingDashboard = () => {
 
   useEffect(() => {
     huddleIframeApp.on("peer-join", (data) =>
-    setRoom(data),
       console.log({ iframeData: data })
     );
     huddleIframeApp.on("peer-left", (data) =>

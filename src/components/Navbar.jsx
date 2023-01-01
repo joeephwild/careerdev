@@ -126,10 +126,12 @@ const Navbar = () => {
                 else connect();
               }}
             />
+            <Link to='/meet'>
             <CustomButton
               title="start a meeting"
               style="bg-green-500 text-sm rounded-lg"
             />
+            </Link>
           </div>
         </div>
       </div>
