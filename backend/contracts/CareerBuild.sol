@@ -31,6 +31,7 @@ contract CareerBuild {
         string name;
         address ownerUser;
         string skills;
+        string techStack;
         uint256 experience;
         uint256 salaryExpectation;
         string description;
@@ -96,6 +97,7 @@ contract CareerBuild {
     function createAnAccount(
         string memory _name,
         string memory _skills,
+        string memory _techStack,
         uint256 _experience,
         uint256 _salaryExpectation,
         string memory _description,
@@ -108,6 +110,7 @@ contract CareerBuild {
         accounts.name = _name;
         accounts.ownerUser = msg.sender;
         accounts.skills = _skills;
+         accounts.techStack = _techStack;
         accounts.experience = _experience;
         accounts.salaryExpectation = _salaryExpectation;
         accounts.description = _description;

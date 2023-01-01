@@ -20,7 +20,7 @@ const Hero = () => {
       </span>
       <div className="flex mt-2 items-center space-x-4">
         <Link to="/createaccount">
-          <button className="border-2 justify-start border-green-500 px-8 py-4 text-lg nd:text-3xl text-wrap min-w-[100px] min-h-[200px] md:min-w-[300px] md:min-h-[200px] font-bold rounded-lg">
+          <button className="border-2 justify-start border-green-500 px-8 py-4 text-lg md:text-3xl text-wrap min-w-[100px] min-h-[200px] md:min-w-[300px] md:min-h-[200px] font-bold rounded-lg">
             I'm an
             <br /> Employer
           </button>

@@ -4,16 +4,34 @@ import { contractAddress } from "../constant";
 import FormField from "./FormField";
 
 const ApplicationCard = ({index}) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [form, setForm] = useState({
     name: "",
     coverLetter: "",
     resume: "",
     portfolio: "",
   });
+
+  const handleFormFieldChange = (fieldName, e) => {
+    setForm({ ...form, [fieldName]: e.target.value });
+  };
+
+  const handleSubmit = async (contract) => {
+    setIsLoading(true)
+  const data = await contract.call(
+      "applyForJobs",
+      index,
+      form.name,
+      form.coverLetter,
+      form.resume,
+      form.portfolio
+    );
+    setIsLoading(false)
+  }
   return (
     <div className="col-span-2 ">
       <div className="flex flex-col bg-[#3a3a43] py-3 px-4">
-        <form className="mt-6">
+        <form onSubmit={(e) => e.preventDefault()} className="mt-6">
           <FormField
             inputType="text"
             labelName="Full Name"
@@ -47,16 +65,7 @@ const ApplicationCard = ({index}) => {
           <Web3Button
           accentColor="green"
             contractAddress={contractAddress}
-            action={(contract) => {
-              contract.call(
-                "applyForJobs",
-                index,
-                form.name,
-                form.coverLetter,
-                form.resume,
-                form.portfolio
-              );
-            }}
+            action={handleSubmit}
           >
             applyForJobs
           </Web3Button>

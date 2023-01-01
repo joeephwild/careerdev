@@ -1,7 +1,7 @@
 import contractabi from "./CareerBuild.json";
 
 export const contractAbi = contractabi.abi;
-export const contractAddress = "0x00a696F18e58857ee7A312d097DF2362Fc8ad0d9";
+export const contractAddress = "0xAa3C537CDeeFc8Ea9e86b7C5dAecF11fa4cDA01E"
 
 export const converTime = (time) => {
   const newTime = new Date(time.toNumber());

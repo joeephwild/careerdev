@@ -64,7 +64,7 @@ const JobsDetails = () => {
             </span>
           </div>
         </div>
-        {!state.owner && (
+        {state.owner && (
           <div className="col-span-2 mt-9">
             <ApplicationCard
              index={state.pid} 
