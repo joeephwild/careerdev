@@ -820,6 +820,11 @@
     react "^18.2.0"
     zustand "^4.0.0-rc.1"
 
+"@huddle01/huddle01-iframe@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@huddle01/huddle01-iframe/-/huddle01-iframe-0.0.8.tgz#b1f9f1b5545575c4234baa1f0af943e27da04e64"
+  integrity sha512-UitrTEZZqm0X9ju/v5UiMUNoRzRay+ssXwYPbwS0GtwmhGvKJWSSoy6YHqMztm4udaeoTPxV+xncGdh4R+IKnQ==
+
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.1.1.tgz#e5d2e450306a9491e3bd77e323e38d7aff315996"

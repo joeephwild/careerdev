@@ -59,7 +59,7 @@ const JobsDetails = () => {
             <span className="font-bold font-ClashDisplay-Bold text-gray-400">
               Description
             </span>
-            <span className="font-ClashDisplay-Light font-noraml mt-6">
+            <span className="font-ClashDisplay-Light text-xs font-noraml mt-6">
               {state.desc}
             </span>
           </div>

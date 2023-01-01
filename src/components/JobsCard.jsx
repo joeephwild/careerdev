@@ -2,8 +2,10 @@ import React from 'react'
 import clock from '../assets/clock.svg'
 import { AiFillClockCircle } from 'react-icons/ai'
 import { ImLocation2 } from 'react-icons/im'
+import { useAccount, useAddress } from '@thirdweb-dev/react'
 
 const JobsCard = ({item, handleClick}) => {
+  const address = useAddress()
     console.log(item)
     function truncate(str, n) {
       return str?.length > n ? str.substr(0, n - 1) + "..." : str;
@@ -33,8 +35,11 @@ const JobsCard = ({item, handleClick}) => {
           <button className='text-black bg-gray-400 px-3 py-2 rounded-full'>Reactjs</button>
           <button className='text-black bg-gray-400 px-3 py-2 rounded-full'>Reactjs</button>
         </div>
-        {!item.owner && (
+        {address !== item.owner ? (
           <button className='bg-green-600 w-full py-4 mt-4'>Apply Now</button>
+        ) : (
+          
+          <button className='bg-green-600 w-full py-4 mt-4'>view details</button>
         )}
     </div>
   )

@@ -1,8 +1,12 @@
 import React from "react";
 import { ConnectWallet } from "@thirdweb-dev/react";
 import { Link } from "react-router-dom";
+import CustomButton from "./CustomButton";
+import { useStateContext } from "../context";
 
 const Hero = () => {
+  const { connect, address } = useStateContext();
+
   return (
     <div className="flex mt-[70px] flex-col items-center justify-center">
       <span className="lg:text-7xl md:text-5xl text-4xl mt-7 font-ClashDisplay-Bold font-bold text-center">
@@ -15,20 +19,30 @@ const Hero = () => {
         jobs in your local area, as well as jobs across the globe!
       </span>
       <div className="flex mt-2 items-center space-x-4">
-        <Link to='/createaccount'>
+        <Link to="/createaccount">
           <button className="border-2 justify-start border-green-500 px-8 py-4 text-lg nd:text-3xl text-wrap min-w-[100px] min-h-[200px] md:min-w-[300px] md:min-h-[200px] font-bold rounded-lg">
             I'm an
             <br /> Employer
           </button>
         </Link>
-        <Link to='/ApplicantForm'>
-        <button className="border-2 border-green-500 px-8 py-4 text-lg md:text-3xl font-bold min-w-[100px] min-h-[200px] md:min-w-[300px] md:min-h-[200px] rounded-lg">
-          I'm <br /> Looking <br /> for a job
-        </button>
+        <Link to="/ApplicantForm">
+          <button className="border-2 border-green-500 px-8 py-4 text-lg md:text-3xl font-bold min-w-[100px] min-h-[200px] md:min-w-[300px] md:min-h-[200px] rounded-lg">
+            I'm <br /> Looking <br /> for a job
+          </button>
         </Link>
       </div>
-      <div>
-        <ConnectWallet className="mt-6 text-sm" accentColor="green" />
+      <div className="my-6">
+        <CustomButton
+          btnType="button"
+          title={address ? "Post a job" : "Connect"}
+          style={
+            address ? "bg-green-500 rounded-lg" : "bg-[#8c6dfd] rounded-lg"
+          }
+          handleClick={() => {
+            if (address) navigate("list");
+            else connect();
+          }}
+        />
       </div>
     </div>
   );
