@@ -11,7 +11,7 @@ const DisplayAllJobs = ({isLoading, job, title}) => {
         navigate(`/jobs-details/${job.skill}`, { state: job})
     }
   return (
-    <div className='md:mt-[8%] mx-9 w-full mt-[20%]'>
+    <div className=' mx-9 w-full mt-9'>
       <h1 className='font-ClashDisplay-Regular text-green-600 text-lg font-bold text-left'>
         {title} ({job.length})
       </h1>

@@ -18,7 +18,7 @@ const AllApplicants = ({ state }) => {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
   return (
-    <div className="flex flex-col  min-h-full mt-9 min-w-full px-4 py-2 items-start">
+    <div className="flex flex-col  min-h-full mt-16 min-w-full px-4 py-2 items-start">
       <img
         src={state.image}
         alt="logo"
