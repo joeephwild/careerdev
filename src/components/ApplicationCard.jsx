@@ -56,8 +56,8 @@ const ApplicationCard = ({index}) => {
           />
           <FormField
             inputType="text"
-            labelName="Resume"
-            placeholder="upload an uptodate resume"
+            labelName="Portfolio"
+            placeholder="upload portfolio"
             value={form.portfolio}
             handleChange={(e) => handleFormFieldChange("portfolio", e)}
           />
