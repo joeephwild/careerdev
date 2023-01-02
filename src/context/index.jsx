@@ -85,6 +85,19 @@ export const StateProvider = ({ children }) => {
     return parsedAccount;
   };
 
+  const getEmployer = async () => {
+    const account = await contract.call("getAllEmployers")
+    const parsedEmployer = account.map((user, i) => ({
+      image: user.companyImage,
+      name: user.CompanyName,
+      category: user.Category,
+      address: user. owner,
+      desc: user.description,
+      location: user.location,
+    }));
+    return parsedEmployer;
+  };
+
   const getUserDetails = async () => {
     const singleAccount = await getAccount();
     const filteredUser = singleAccount.filter(
@@ -122,7 +135,8 @@ export const StateProvider = ({ children }) => {
         lobbyPeers,
         roomState,
         recordingState,
-        recordings
+        recordings,
+        getEmployer
       }}
     >
       {children}

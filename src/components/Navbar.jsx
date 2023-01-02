@@ -19,7 +19,7 @@ const Navbar = () => {
     },
     {
       name: "companies",
-      link: "/",
+      link: "/companies",
     },
     {
       name: "Jobs",
@@ -49,7 +49,7 @@ const Navbar = () => {
         <img src={logo} alt="logo" className="h-24 w-24 object-contain" />
         <ul className="lg:flex hidden cursor-pointer list-none items-center space-x-8 font-normal">
           <Link to="/">Home</Link>
-          <li>Companies</li>
+          <Link to='/companies'>Companies</Link>
           <Link to="/jobs">Jobs</Link>
           <li>Interviews</li>
           <li>faq</li>

@@ -4,7 +4,6 @@ import JobsCard from './JobsCard';
 import Loader from './Loader';
 
 const DisplayAllJobs = ({isLoading, job, title}) => {
-  console.log(job)
     const navigate = useNavigate();
 
     const handleNavigate = (job) => {
