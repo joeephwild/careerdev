@@ -6,7 +6,7 @@ const MeetingDashboard = () => {
   const roomId = useHuddleStore(state => state.roomState.roomId);
   const iframeConfig = {
     roomUrl: `https://iframe.huddle01.com/${roomId}`,
-    height: "100%",
+    height: "90%",
     width: "100%",
   };
   const reactions = [
