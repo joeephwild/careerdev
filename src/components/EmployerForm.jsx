@@ -80,11 +80,11 @@ const EmployerForm = () => {
               contractAddress={contractAddress}
               action={handleSubmit}
             >
-              createEmployerAccount
+             create employee
             </Web3Button>
           </div>
           <div className="flex flex-col items-center mt-6 ">
-            <span>Wanna apply for jobs, sign up as an applicant below</span>
+            <span>Wanna apply jobs, sign up as an applicant below</span>
             <Link to="/ApplicantForm">
               <span className="text-lg font-bold underline text-green-500">
                 Create an Applicant account
