@@ -1,10 +1,13 @@
 import { Web3Button } from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import { contractAddress } from "../constant";
+import CustomButton from "./CustomButton";
 import FormField from "./FormField";
+import Loader from "./Loader";
 
-const ApplicationCard = ({index}) => {
-  const [isLoading, setIsLoading] = useState(false)
+const ApplicationCard = ({ index }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [form, setForm] = useState({
     name: "",
     coverLetter: "",
@@ -17,8 +20,8 @@ const ApplicationCard = ({index}) => {
   };
 
   const handleSubmit = async (contract) => {
-    setIsLoading(true)
-  const data = await contract.call(
+    setIsLoading(true);
+    const data = await contract.call(
       "applyForJobs",
       index,
       form.name,
@@ -26,10 +29,12 @@ const ApplicationCard = ({index}) => {
       form.resume,
       form.portfolio
     );
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+    setSuccess(true);
+  };
   return (
     <div className="col-span-2 ">
+      {isLoading && <Loader />}
       <div className="flex flex-col bg-[#3a3a43] py-3 px-4">
         <form onSubmit={(e) => e.preventDefault()} className="mt-6">
           <FormField
@@ -62,15 +67,22 @@ const ApplicationCard = ({index}) => {
             handleChange={(e) => handleFormFieldChange("portfolio", e)}
           />
           <div className="mt-6">
-          <Web3Button
-          accentColor="green"
-            contractAddress={contractAddress}
-            action={handleSubmit}
-          >
-            applyForJobs
-          </Web3Button>
-          </div>
+            {success && 
+            <CustomButton
+            title='Application Succesfull'
+            style='bg-green-600 rounded-lg '
+             />}
 
+            {!success && (
+              <Web3Button
+                accentColor="green"
+                contractAddress={contractAddress}
+                action={handleSubmit}
+              >
+                applyForJobs
+              </Web3Button>
+            )}
+          </div>
         </form>
       </div>
     </div>
