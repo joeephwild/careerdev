@@ -45,7 +45,7 @@ const CreateJoblist = () => {
   }
   return (
     <div className="w-full h-full items-center flex flex-col justify-center">
-      <div className="flex  flex-col rounded-[10px] sm:p-10 p-4">
+      <div className="flex  flex-col rounded-[10px] mt-[10%] sm:p-10 p-4">
         {isLoading && <Loader />}
         <div className=" flex-col flex justify-center items-center p-[16px] sm:min-w-[680px] bg-[#3a3a43] rounded-[10px]">
           <div className="text-white text-xl font-bold">Applicant Account</div>
