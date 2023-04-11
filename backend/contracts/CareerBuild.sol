@@ -7,10 +7,10 @@ contract CareerBuild {
         string companyImage;
         string Category;
         uint256 salary;
-        uint256 timeStamp;
         uint256 noAppllicant;
         address owner;
         string description;
+        string techStack;
         string skills;
         string location;
         string jobType;
@@ -25,6 +25,7 @@ contract CareerBuild {
         address owner;
         string description;
         string location;
+        string companyWebsite;
     }
 
     struct Candidate {
@@ -157,19 +158,23 @@ contract CareerBuild {
     }
 
     function createEmployerAccount(
+        string memory _companyImage,
         string memory _CompanyName,
         string memory _Category,
         string memory _description,
-        string memory _location
+        string memory _location,
+        string memory _companyWebsite
     ) public {
         //create a new variable to store every data
         require(msg.sender != administrator, "Administrator not allowed");
         employer storage Profile = companyProfile[msg.sender];
+        Profile.companyImage = _companyImage;
         Profile.CompanyName = _CompanyName;
         Profile.owner = msg.sender;
         Profile.Category = _Category;
         Profile.description = _description;
         Profile.location = _location;
+        Profile.companyWebsite = _companyWebsite;
         employerCounter++;
         listEmployers.push(Profile);
     }
@@ -207,20 +212,22 @@ contract CareerBuild {
         string memory _Category,
         uint256 _salary,
         string memory _description,
+        string memory _techStack,
         string memory _skills,
         string memory _location,
         string memory _jobType
-    ) public returns (uint256) {
+    ) public payable returns (uint256) {
         //create a new variable to store every data
+        require(msg.value == 0.05 ether, "pls send valid ether amount");
         Jobs storage post = company[jobCounter];
         post.CompanyName = _CompanyName;
         post.companyImage = _companyImage;
         post.Category = _Category;
         post.salary = _salary;
-        post.timeStamp = block.timestamp;
         post.noAppllicant = applicant;
         post.owner =msg.sender;
         post.description = _description;
+        post.techStack = _techStack;
         post.skills = _skills;
         post.location = _location;
         post.jobType = _jobType;
